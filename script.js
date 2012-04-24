@@ -28,14 +28,6 @@ if (Meteor.is_client) {
   };
   Template.pledgeTotals.amountTotal = function () {
     // find sum of all amounts
-    if (Pledges.find().count() > 0) {
-    var query = Pledges.find();
-    var results = 0;
-   // for (var i = 0; i < amounts.length; i++) {
-     //    results += amounts[i];
-   // }
-    return results; 
-//Pledges.insert({email: emails[i], amount: Math.floor(Math.random()*10)*5});
         
     }
 
