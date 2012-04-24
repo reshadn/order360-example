@@ -28,9 +28,7 @@ if (Meteor.is_client) {
   };
   Template.pledgeTotals.amountTotal = function () {
     // find sum of all amounts
-        
-    }
-
+    return true;       
   };
 
   Template.pledge.selected = function () {
