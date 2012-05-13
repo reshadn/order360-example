@@ -82,13 +82,7 @@
             <div class="stream-container">
             <div class="stream-items">
             
-            <div class="stream-item-content">
-            <h4><span class="label warning">Pending</span> ABC Company Inc. <small>(555) 555-5555</small></h4>
-            <h5>4 tires $200.00 <small>#2005 #Prius</small></h5>
-            <p>Assigned to: Najeem</p>
-            <p><small>10/13/11 2:30 PM</small> <a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
-            <hr class="component-spacer"></div> <!-- END stream-item-content -->
-            {{> Orders}}
+                        {{> Orders}}
             </div> <!-- END stream-items -->
         </div> <!-- END stream-container -->
     </div> <!-- END stream-manager --> 
@@ -127,17 +121,15 @@
 
 <template name="Orders">
 {{#each orders}}
-{{partID}}
-{{year}}
-{{model}}
-{{partInfo}}
-{{partPrice}}
-{{customerName}}
-{{customerPhone}}
-{{status}}
-{{assigned}}
-{{timestamp}}
-{{comments.commentID}}
+<div class="stream-item-content">
+<h4><span class="label warning">{{status}}</span>{{customerName}}
+<small>{{customerPhone}}</small></h4>
+<h5>{{partInfo}} ${{partPrice}} <small>#{{year}} #{{model}}</small></h5>
+<p>Assigned to: {{assigned}}</p>
+<p><small>10/13/11 2:30 PM  {{timestamp}}</small> <a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
 {{comments.comment}}
+{{comments.commenter}}
+{{comments.commentTime}}
+<hr class="component-spacer"></div> <!-- END stream-item-content -->
 {{/each}}
 </template>

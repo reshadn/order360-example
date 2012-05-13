@@ -11,28 +11,38 @@ if (Meteor.is_client) {
 // On server startup, create some orders if the database is empty.
 if (Meteor.is_server) {
 Meteor.startup(function () {
-  if (Orders.find().count() === 0) {
-    var data = ["2006", "Honda", "front bumper", "100.00", "Car Sales Company", "555-555-5555", "Quote", "Najeem", "This is a good part and we should sell quickly"]
+  if (Orders.find().count() < 10) {
+    var models = ["Honda", "Toyota", "Acura", "Saturn", "Lexus"];
+    var partInfos = ["front bumper", "right head light", "rear view mirror", "a very long part name that will take up a lot of space"];
+    var partPrice = 100; 
+    var customers = ["ABC Company", "XYZ Company", "Local Auto Sales", "Bros. Auto Parts", "Big Co Auto Dealers"]; 
+    var phones = "555-555-5555"; 
+    var statuses = ["Quote", "Pending", "Pick up", "Delivery", "Quote"]; 
+    var assignees = ["Najeem", "Juan", "Isaac", "Fahim", "Shiraz"]; 
+    var comment = "This is a good part and we should sell quickly";
     var timestamp = (new Date()).getTime();
-    var i = 1; // track comment counter
+    var year = 2006;
+    for(var i=0; i < 5; i++){
     Orders.insert({
-                partID: i,
-                year: data[0],
-                model: data[1],
-                partInfo: data[2],
-                partPrice: data[3],
-                customerName: data[4],
-                customerPhone: data[5],
-                status: data[6],
-                assigned: data[7],
+                year: year,
+                model: models[i],
+                partInfo: partInfos[i],
+                partPrice: partPrice,
+                customerName: customers[i],
+                customerPhone: phones,
+                status: statuses[i],
+                assigned: assignees[i],
                 timestamp: timestamp,
-                comments: {
-                        commentID: i,
-                        comment: data[8]
+                comments: { 
+                        comment: comment,
+                        commenter: assignees[0],
+                        commentTime: timestamp
                 }
                 });
                 timestamp += 1; // ensure unique timestamp.
-                i++; // increment comment counter
+                year++; // increment years
+                partPrice += 100; // increment partPrice
     }
+  }
 });
 }
