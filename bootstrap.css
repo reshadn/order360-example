@@ -2310,6 +2310,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  margin: 0px 10px 0px 2px;
 }
 .label.important {
   background-color: #c43c35;

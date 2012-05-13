@@ -11,13 +11,14 @@ if (Meteor.is_client) {
 // On server startup, create some orders if the database is empty.
 if (Meteor.is_server) {
 Meteor.startup(function () {
-  if (Orders.find().count() < 10) {
+  if (Orders.find().count() === 0) {
     var models = ["Honda", "Toyota", "Acura", "Saturn", "Lexus"];
     var partInfos = ["front bumper", "right head light", "rear view mirror", "a very long part name that will take up a lot of space"];
     var partPrice = 100; 
     var customers = ["ABC Company", "XYZ Company", "Local Auto Sales", "Bros. Auto Parts", "Big Co Auto Dealers"]; 
     var phones = "555-555-5555"; 
-    var statuses = ["Quote", "Pending", "Pick up", "Delivery", "Quote"]; 
+    var statusTypes = ["Quote", "Pending", "Pick up", "Delivery", "Quote"]; 
+    var statusLabels = ["", "warning", "notice", "success", "warning"];
     var assignees = ["Najeem", "Juan", "Isaac", "Fahim", "Shiraz"]; 
     var comment = "This is a good part and we should sell quickly";
     var timestamp = (new Date()).getTime();
@@ -30,14 +31,17 @@ Meteor.startup(function () {
                 partPrice: partPrice,
                 customerName: customers[i],
                 customerPhone: phones,
-                status: statuses[i],
+                status: {
+                        statusType: statusTypes[i],
+                        statusLabel: statusLabels[i]
+                        },
                 assigned: assignees[i],
                 timestamp: timestamp,
                 comments: { 
                         comment: comment,
                         commenter: assignees[0],
                         commentTime: timestamp
-                }
+                        }
                 });
                 timestamp += 1; // ensure unique timestamp.
                 year++; // increment years
