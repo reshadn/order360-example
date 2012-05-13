@@ -1,0 +1,135 @@
+<head>
+    <title>Order360</title>
+    <meta name="description" content="Order360 - Order Management - Solutions for Small to Medium Auto Recycling/ Dismantling Businesses">
+    <meta name="author" content="Reshad Noorzay">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="topbar" data-dropdown="dropdown">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#"><img id="logo"
+          src="http://order360.meteor.com/images/logo_order360_158x40.jpg" /></a>
+        </div>
+      </div>
+    </div><!-- END topbar -->
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Content -->
+        <div class="content">
+        <!-- Main Content -->
+        <div class="row">
+        
+        <!-- Left Section -->
+          <div class="span10">
+            <input class="mini" id="year" name="year" size="" placeHolder="Year" type="text"></input>
+            <input class="small" id="model" name="model" size="" placeHolder="Model" type="text"></input>
+            <br />
+            <input class="large" id="partInfo" name="partInfo" placeHolder="Part Name and Details" size="" type="text"></input>
+            <input class="mini" id="partPrice" name="partPrice" placeHolder="$ 0.00" size="" type="text"></input>
+            <br />
+            <input class="" id="customerName" name="customerName" size="" placeHolder="Customer Name" type="text"></input>
+            <input class="small" id="customerPhone" name="customerPhone" size="" placeHolder="(555) 555-5555" type="text"></input>
+            <br />
+            <select class="small" name="orderStatus" id="orderStatus">
+                <option>Status...</option>
+                <option>Pending</option>
+                <option>Delivery</option>
+                <option>Pick Up</option>
+                <option>Quote</option>
+            </select>
+            <select class="medium" name="assignedTo" id="assignedTo">
+                <option>Assign to...</option>
+                <option>Najeem</option>
+                <option>Fahim</option>
+                <option>Isaac</option>
+                <option>Shiraz</option>
+                <option>Juan</option>
+            </select>
+            <a href="#" class="btn primary">Add Order</a>
+            
+            <hr class="component-spacer">
+            
+            <ul class="tabs">
+            <li class="active"><a href="#">360&deg;</a></li>
+            <li><a href="#">Price (Hi-Lo)</a></li>
+            <li class="dropdown" data-dropdown="dropdown">
+                <a href="#" class="dropdown-toggle">Status</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Pending</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Delivery</a></li>
+                    <li><a href="#">Pickup</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Quote</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" data-dropdown="dropdown">
+              <a href="#" class="dropdown-toggle">Assigned To</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Najeem</a></li>
+                <li><a href="#">Fahim</a></li>
+                <li><a href="#">Isaac</a></li>
+                <li><a href="#">Shiraz</a></li>
+                <li><a href="#">Juan</a></li>
+              </ul>
+            </li>
+            </ul>
+
+            <div class="stream-manager">
+            <div class="stream-container">
+            <div class="stream-items">
+            
+            <div class="stream-item-content">
+            <h4><span class="label warning">Pending</span> ABC Company Inc. <small>(555) 555-5555</small></h4>
+            <h5>4 tires $200.00 <small>#2005 #Prius</small></h5>
+            <p>Assigned to: Najeem</p>
+            <p><small>10/13/11 2:30 PM</small> <a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
+            <hr class="component-spacer"></div> <!-- END stream-item-content -->
+            {{> Orders}}
+            </div> <!-- END stream-items -->
+        </div> <!-- END stream-container -->
+    </div> <!-- END stream-manager --> 
+
+          </div><!-- END Left Section -->
+        
+        <!-- Dashboard -->
+          <div class="span4 dashboard">
+            <div class="insights">
+                <h3><small>Insights</small></h3>
+                <ul>
+                    <li><a href="#"><span class="label notice">Delivery : 22</span></a></li>
+                    <li><a href="#"><span class="label success">Pick up : 15</span></a></li>
+                    <li><a href="#"><span class="label warning">Pending : 20</span></a></li>
+                    <li><a href="#"><span class="label">Quote : 30</span></a></li>            
+                </ul>
+            </div>
+            <footer>
+                <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="mailto:rnoorzay@gmail.com">Support</a></li>
+                <li><span>&copy; Order360 2012</span></li>
+                </ul>
+            </footer>
+          </div> <!-- END Dashboard -->
+        </div><!-- END Main Content-->
+        </div><!-- END Content -->
+    </div> <!-- END Container -->
+</div><!-- END page-outer -->
+<!-- Scripts -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script type="text/javascript" src="client/bootstrap-dropdown.js"></script>  
+<!-- End Scripts-->
+</body>
+
+<template name="Orders">
+    <div class="stream-item-content orders">
+    {{#each Orders}}
+        {{> order}}
+    {{/each}}
+    <hr class="component-spacer"></div> <!-- END stream-item-content -->
+    </div>
+</template>
