@@ -126,10 +126,18 @@
 </body>
 
 <template name="Orders">
-    <div class="stream-item-content orders">
-    {{#each Orders}}
-        {{> order}}
-    {{/each}}
-    <hr class="component-spacer"></div> <!-- END stream-item-content -->
-    </div>
+{{#each orders}}
+{{partID}}
+{{year}}
+{{model}}
+{{partInfo}}
+{{partPrice}}
+{{customerName}}
+{{customerPhone}}
+{{status}}
+{{assigned}}
+{{timestamp}}
+{{comments.commentID}}
+{{comments.comment}}
+{{/each}}
 </template>

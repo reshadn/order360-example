@@ -3,24 +3,20 @@
 
 Orders = new Meteor.Collection("orders");
 
+if (Meteor.is_client) {
+    Template.Orders.orders = function() {
+        return Orders.find();
+    };
+}
 // On server startup, create some orders if the database is empty.
 if (Meteor.is_server) {
 Meteor.startup(function () {
   if (Orders.find().count() === 0) {
-    // Orders -- {year: Number,
-    //            model: String,
-    //            partInfo: String ,
-    //            partPrice: Number,
-    //            customerName: String,
-    //            customerPhone: Number,
-    //            status: String,
-    //            assigned: String,
-    //            timestamp: Number}
-
-    var data = ["2006", "Honda", "front bumper", "100.00", "Car Sales Company", "555-555-5555", "Quote", "Najeem"]
+    var data = ["2006", "Honda", "front bumper", "100.00", "Car Sales Company", "555-555-5555", "Quote", "Najeem", "This is a good part and we should sell quickly"]
     var timestamp = (new Date()).getTime();
-    
+    var i = 1; // track comment counter
     Orders.insert({
+                partID: i,
                 year: data[0],
                 model: data[1],
                 partInfo: data[2],
@@ -29,10 +25,14 @@ Meteor.startup(function () {
                 customerPhone: data[5],
                 status: data[6],
                 assigned: data[7],
-                timestamp: timestamp
+                timestamp: timestamp,
+                comments: {
+                        commentID: i,
+                        comment: data[8]
+                }
                 });
                 timestamp += 1; // ensure unique timestamp.
-
+                i++; // increment comment counter
     }
 });
 }
