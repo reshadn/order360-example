@@ -2,6 +2,7 @@
     <title>Order360</title>
     <meta name="description" content="Order360 - Order Management - Solutions for Small to Medium Auto Recycling/ Dismantling Businesses">
     <meta name="author" content="Reshad Noorzay">
+    <link rel="shortcut icon" href="http://order360.meteor.com/favicon.ico">
 </head>
 
 <body>
@@ -10,7 +11,7 @@
       <div class="fill">
         <div class="container">
           <a class="brand" href="#"><img id="logo"
-          src="http://order360.meteor.com/public/images/logo_order360_158x40.jpg" /></a>
+          src="http://order360.meteor.com/images/logo_order360_158x40.jpg" /></a>
         </div>
       </div>
     </div><!-- END topbar -->
@@ -125,13 +126,12 @@
 <h4><span class="label
 {{status.statusLabel}}">{{status.statusType}}</span>{{customerName}} <small class="phone">{{customerPhone}}</small></h4>
 <h5>${{partPrice}}  {{partInfo}} <small>#{{year}} #{{model}}</small></h5>
-<p>Assigned to: <span class="label label-info">{{assignedTo}}</span></p>
-<p><small>{{timestamp}}</small>
-<!-- Commenting turned off temporarily
+<p>Assigned to: <span class="label label-info">{{assignedTo}}</span><small>{{timestamp}}</small></p>
+<p>
  <a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
-{{comments.comment}}
-{{comments.commenter}}
-{{comments.commentTime}} -->
+<p>{{comments.comment}}
+{{comments.commenter}}</p>
+<p><small>{{comments.commentTime}}</small></p>
 <hr class="component-spacer"></div> <!-- END stream-item-content -->
 {{/each}}
 </template>
