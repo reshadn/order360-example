@@ -2,7 +2,7 @@
     <title>Order360</title>
     <meta name="description" content="Order360 - Order Management - Solutions for Small to Medium Auto Recycling/ Dismantling Businesses">
     <meta name="author" content="Reshad Noorzay">
-    <link rel="shortcut icon" href="http://order360.meteor.com/favicon.ico">
+    <link rel="shortcut icon" href="http://order360app.meteor.com/favicon.ico">
 </head>
 
 <body>
@@ -11,7 +11,7 @@
       <div class="fill">
         <div class="container">
           <a class="brand" href="#"><img id="logo"
-          src="http://order360.meteor.com/images/logo_order360_158x40.jpg" /></a>
+          src="http://order360app.meteor.com/images/logo_order360_158x40.jpg" /></a>
         </div>
       </div>
     </div><!-- END topbar -->
@@ -35,14 +35,12 @@
             <input class="small" id="customerPhone" name="customerPhone" size="" placeHolder="(555) 555-5555" type="text"></input>
             <br />
             <select class="small" name="orderStatus" id="orderStatus">
-                <option>Status...</option>
                 <option>Pending</option>
                 <option>Delivery</option>
                 <option>Pick Up</option>
                 <option>Quote</option>
             </select>
             <select class="medium" name="assignedTo" id="assignedTo">
-                <option>Assign to...</option>
                 <option>Najeem</option>
                 <option>Fahim</option>
                 <option>Isaac</option>
@@ -124,14 +122,21 @@
 {{#each orders}}
 <div class="stream-item-content">
 <h4><span class="label
-{{status.statusLabel}}">{{status.statusType}}</span>{{customerName}} <small class="phone">{{customerPhone}}</small></h4>
-<h5>${{partPrice}}  {{partInfo}} <small>#{{year}} #{{model}}</small></h5>
-<p>Assigned to: <span class="label label-info">{{assignedTo}}</span><small>{{timestamp}}</small></p>
+{{status.statusLabel}}">{{status.statusType}}</span>{{customerName}} <span class="phone">{{customerPhone}}</span></h4>
+<h4>${{partPrice}}.00  {{partInfo}} <small>#{{year}} #{{model}}</small></h4>
+<p>Assigned to: <span class="label label-info">{{assignedTo}}</span><small>{{timestamp}}</small>
+<button class="btn-mini btn-danger delete">
+<!-- icons not currently available
+<i class="icon-trash icon-white"></i>
+--> 
+delete</button></p>
+<!-- TEMPORARILY HIDING COMMENTS  
 <p>
- <a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
+<a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
 <p>{{comments.comment}}
-{{comments.commenter}}</p>
+- <strong>{{comments.commenter}}</strong></p>
 <p><small>{{comments.commentTime}}</small></p>
+-->
 <hr class="component-spacer"></div> <!-- END stream-item-content -->
 {{/each}}
 </template>

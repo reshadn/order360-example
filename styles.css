@@ -71,6 +71,11 @@ input, select {margin: 5px;}
     margin-left: 6px;
 }
 
+/* SELECTED ORDER */
+.order.selected {
+    background-color: yellow;
+}
+
 /* FOOTER */
 footer {
     clear: both;

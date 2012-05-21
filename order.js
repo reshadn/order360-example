@@ -5,24 +5,53 @@ Orders = new Meteor.Collection("orders");
 
 if (Meteor.is_client) {
     Template.Orders.orders = function() {
-        return Orders.find();
+        // Orders.find().sort({timestamp: 1}); 
+        return Orders.find({}, {sort: {timestamp: 1}});
     };
 
    var addOrder = function(){ 
+        var yearInput = $('#year').val();
+        var modelInput = $('#model').val();
+        var partInfoInput = $('#partInfo').val();
+        var partPriceInput = $('#partPrice').val();
+        var customerNameInput = $('#customerName').val();
+        var customerPhoneInput = $('#customerPhone').val();
+        var orderStatusInput = $('#orderStatus').val();
+        
+        // Determine orderStatus and assign label
+        var statusLabels = ["", "warning", "notice", "success"];
+        var setStatusLabel;
+        switch(orderStatusInput)
+        {
+            case "Pending":
+            setStatusLabel = statusLabels[1];
+            break;
+            case "Delivery":
+            setStatusLabel = statusLabels[2];
+            break;
+            case "Pick Up":
+            setStatusLabel = statusLabels[3];
+            break;
+            case "Quote":
+            setStatusLabel = statusLabels[0];
+            break;
+        }
+
+        var assignedToInput = $('#assignedTo').val()
         var timestamp = new Date();
         var now = timestamp.toString('yyyy-MM-dd');
         Orders.insert({
-                year: 2010,
-                model: "Honda",
-                partInfo: "right side door",
-                partPrice: 200,
-                customerName: "Reshad Noorzay",
-                customerPhone: "(310) 555-5555",
+                year: yearInput,
+                model: modelInput,
+                partInfo: partInfoInput,
+                partPrice: partPriceInput,
+                customerName: customerNameInput,
+                customerPhone: customerPhoneInput,
                 status: {
-                        statusType: "Quote",
-                        statusLabel: ""
+                        statusType: orderStatusInput,
+                        statusLabel: setStatusLabel
                 },
-                assignedTo: "Najeem",
+                assignedTo: assignedToInput,
                 timestamp: now,
                 comments: { 
                         comment: "need to pull from yard",
@@ -30,11 +59,20 @@ if (Meteor.is_client) {
                         commentTime: now
                         }
                 });
+
+        Template.Orders.events = {
+            'click button.delete': function () {
+                Session.set("selected_order", this.id);
+                Orders.remove(Session.get("selected_order"));
+            }
+        }
    };
 }
 // On server startup, create some orders if the database is empty.
 if (Meteor.is_server) {
 Meteor.startup(function () {
+// Initial Startup function to show placeholder info
+/*
   if (Orders.find().count() === 0) {
     var models = ["Honda", "Toyota", "Acura", "Saturn", "Lexus"];
     var partInfos = ["front bumper", "right head light", "rear view mirror", "a very long part name that will take up a lot of space"];
@@ -44,7 +82,7 @@ Meteor.startup(function () {
     var statusTypes = ["Quote", "Pending", "Pick up", "Delivery", "Quote"]; 
     var statusLabels = ["", "warning", "notice", "success", ""];
     var assignees = ["Najeem", "Juan", "Isaac", "Fahim", "Shiraz"]; 
-    var comment = "This is a good part and we should sell quickly";
+    var commentDefault = "This is a good part and we should sell quickly";
     var timestamp = new Date();
     var now = timestamp.toString('yyyy-MM-dd');
     var year = 2006;
@@ -63,7 +101,7 @@ Meteor.startup(function () {
                 assignedTo: assignees[i],
                 timestamp: now,
                 comments: { 
-                        comment: comment,
+                        comment: commentDefault,
                         commenter: assignees[0],
                         commentTime: now
                         }
@@ -73,5 +111,6 @@ Meteor.startup(function () {
                 partPrice += 100; // increment partPrice
     }
   }
+*/
 });
 }
