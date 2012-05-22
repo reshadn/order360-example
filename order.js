@@ -6,7 +6,7 @@ Orders = new Meteor.Collection("orders");
 if (Meteor.is_client) {
     Template.Orders.orders = function() {
         // Orders.find().sort({timestamp: 1}); 
-        return Orders.find({}, {sort: {timestamp: 1}});
+        return Orders.find({}, {sort: {rawTime: -1}});
     };
 
    var addOrder = function(){ 
@@ -39,6 +39,7 @@ if (Meteor.is_client) {
 
         var assignedToInput = $('#assignedTo').val()
         var timestamp = new Date();
+        var time = timestamp.getTime();
         var now = timestamp.toString('yyyy-MM-dd');
         Orders.insert({
                 year: yearInput,
@@ -53,6 +54,7 @@ if (Meteor.is_client) {
                 },
                 assignedTo: assignedToInput,
                 timestamp: now,
+                rawTime: time,
                 comments: { 
                         comment: "need to pull from yard",
                         commenter: "Fahim",
