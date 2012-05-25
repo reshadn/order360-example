@@ -68,7 +68,10 @@ if (Meteor.is_client) {
        // Delete orders from the db 
         Template.orderItem.events = {
             'click .delete': function () {
-            Orders.remove(this._id);
+                var confirmDelete = confirm("Are you sure you want to delete this order? (This cannot be reversed)");
+                if (confirmDelete === true){
+                    Orders.remove(this._id);
+                }
             }
         };
 } // end if meteor.is_client
