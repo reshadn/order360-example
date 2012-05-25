@@ -4,11 +4,12 @@
 Orders = new Meteor.Collection("orders");
 
 if (Meteor.is_client) {
+    // Display all orders and sort by last created
     Template.Orders.orders = function() {
-        // Orders.find().sort({timestamp: 1}); 
         return Orders.find({}, {sort: {rawTime: -1}});
     };
 
+    // create an order from input fields
    var addOrder = function(){ 
         var yearInput = $('#year').val();
         var modelInput = $('#model').val();
@@ -41,6 +42,7 @@ if (Meteor.is_client) {
         var timestamp = new Date();
         var time = timestamp.getTime();
         var now = timestamp.toString('yyyy-MM-dd');
+        // add orders from input fields to MongoDB
         Orders.insert({
                 year: yearInput,
                 model: modelInput,
@@ -61,15 +63,15 @@ if (Meteor.is_client) {
                         commentTime: now
                         }
                 });
-
-        Template.Orders.events = {
-            'click button.delete': function () {
-                Session.set("selected_order", this.id);
-                Orders.remove(Session.get("selected_order"));
+        }; // end addOrder
+       
+       // Delete orders from the db 
+        Template.orderItem.events = {
+            'click .delete': function () {
+            Orders.remove(this._id);
             }
-        }
-   };
-}
+        };
+} // end if meteor.is_client
 // On server startup, create some orders if the database is empty.
 if (Meteor.is_server) {
 Meteor.startup(function () {

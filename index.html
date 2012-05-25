@@ -120,12 +120,17 @@
 
 <template name="Orders">
 {{#each orders}}
+{{> orderItem}}
+<hr class="component-spacer">
+{{/each}}
+</template>
+
+<template name="orderItem">
 <div class="stream-item-content">
-<h4><span class="label
-{{status.statusLabel}}">{{status.statusType}}</span>{{customerName}} <span class="phone">{{customerPhone}}</span></h4>
+<h4><span class="label {{status.statusLabel}}">{{status.statusType}}</span>{{customerName}} <span class="phone">{{customerPhone}}</span></h4>
 <h4>${{partPrice}}.00  {{partInfo}} <small>#{{year}} #{{model}}</small></h4>
 <p>Assigned to: <span class="label label-info">{{assignedTo}}</span><small>{{timestamp}}</small>
-<!-- <button class="btn-mini btn-danger delete">delete</button></p> -->
+<button class="btn-mini btn-danger delete">delete</button></p>
 <!-- TEMPORARILY HIDING COMMENTS  
 <p>
 <a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
@@ -133,6 +138,5 @@
 - <strong>{{comments.commenter}}</strong></p>
 <p><small>{{comments.commentTime}}</small></p>
 -->
-<hr class="component-spacer"></div> <!-- END stream-item-content -->
-{{/each}}
+</div> <!-- END stream-item-content -->
 </template>
