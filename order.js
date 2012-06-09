@@ -64,16 +64,36 @@ if (Meteor.is_client) {
                         }
                 });
         }; // end addOrder
-       
+      
+        Template.orderItem.editOrderItemView = function () {
+           // var order = Orders.findOne(this._id);
+           var order = Orders.findOne(Session.get("selected_order"));
+            return order; 
+        };
+        
+        Template.orderItem.selected = function () {
+            return Session.equals("selected_order", this.id) ? "selected" : '';
+        };
        // Delete orders from the db 
         Template.orderItem.events = {
-            'click .delete': function () {
+            'click .deleteOrder': function () {
                 var confirmDelete = confirm("Are you sure you want to delete this order? (This cannot be reversed)");
                 if (confirmDelete === true){
                     Orders.remove(this._id);
                 }
+            },
+            'click .editOrder': function () {
+                alert("edit me");
+            },
+            'click .saveOrder': function () {
+                alert("SAVED");
+            },
+            'click': function () {
+                 Session.set("selected_order", this.id);
             }
-        };
+        }; // end orderItem.events 
+
+
 } // end if meteor.is_client
 // On server startup, create some orders if the database is empty.
 if (Meteor.is_server) {
