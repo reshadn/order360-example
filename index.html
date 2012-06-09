@@ -53,6 +53,7 @@
             
             <ul class="tabs">
             <li class="active"><a href="#">360&deg;</a></li>
+          <!-- 
             <li><a href="#">Price (Hi-Lo)</a></li>
             <li class="dropdown" data-dropdown="dropdown">
                 <a href="#" class="dropdown-toggle">Status</a>
@@ -75,6 +76,7 @@
                 <li><a href="#">Juan</a></li>
               </ul>
             </li>
+            -->
             </ul>
 
             <div class="stream-manager">
@@ -127,10 +129,10 @@
 
 <template name="orderItem">
 <div class="stream-item-content">
-<h4><span class="label {{status.statusLabel}}">{{status.statusType}}</span>{{customerName}} <span class="phone">{{customerPhone}}</span></h4>
-<h4>${{partPrice}}.00  {{partInfo}} <small>#{{year}} #{{model}}</small></h4>
-<p>Assigned to: <span class="label label-info">{{assignedTo}}</span></p>
+<h3><span class="label {{status.statusLabel}}">{{status.statusType}}</span>{{partInfo}}  <small>#{{year}} #{{model}}</small></h3>
+<h4>${{partPrice}}.00 for {{customerName}} <span class="phone">{{customerPhone}}</span></h4>
 <!-- 
+<p>Assigned to: <span class="label label-info">{{assignedTo}}</span></p>
 <p>
 <a href="#"><img src="https://si0.twimg.com/images/dev/cms/intents/icons/reply_hover.png" />Add Comment</a><p>
 <p>{{comments.comment}}
@@ -165,7 +167,7 @@ value="{{customerPhone}}" placeholder="(555) 555-5555"></input>
 <option>Shiraz</option>
 <option>Juan</option>
 </select>
-<input type="button" class="btn saveOrder" value="Save" />
+<input type="button" class="btn info saveOrder" value="Save" />
 </div>
 <p><small>{{timestamp}}</small>
 <a class="deleteOrder">delete</a></p>
