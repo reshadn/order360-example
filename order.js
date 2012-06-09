@@ -64,17 +64,7 @@ if (Meteor.is_client) {
                         }
                 });
         }; // end addOrder
-      
-        Template.orderItem.editOrderItemView = function () {
-           // var order = Orders.findOne(this._id);
-           var order = Orders.findOne(Session.get("selected_order"));
-            return order; 
-        };
         
-        Template.orderItem.selected = function () {
-            return Session.equals("selected_order", this.id) ? "selected" : '';
-        };
-       // Delete orders from the db 
         Template.orderItem.events = {
             'click .deleteOrder': function () {
                 var confirmDelete = confirm("Are you sure you want to delete this order? (This cannot be reversed)");
@@ -82,17 +72,62 @@ if (Meteor.is_client) {
                     Orders.remove(this._id);
                 }
             },
-            'click .editOrder': function () {
-                alert("edit me");
-            },
             'click .saveOrder': function () {
-                alert("SAVED");
-            },
-            'click': function () {
-                 Session.set("selected_order", this.id);
+        var yearInput = $('#year' + this._id).val();
+        var modelInput = $('#model' + this._id).val();
+        var partInfoInput = $('#partInfo' + this._id).val();
+        var partPriceInput = $('#partPrice' + this._id).val();
+        var customerNameInput = $('#customerName' + this._id).val();
+        var customerPhoneInput = $('#customerPhone' + this._id).val();
+        var orderStatusInput = $('#orderStatus' + this._id).val();
+        // Determine orderStatus and assign label
+        var statusLabels = ["", "warning", "notice", "success"];
+        var setStatusLabel;
+        switch(orderStatusInput)
+        {
+            case "Pending":
+            setStatusLabel = statusLabels[1];
+            break;
+            case "Delivery":
+            setStatusLabel = statusLabels[2];
+            break;
+            case "Pick Up":
+            setStatusLabel = statusLabels[3];
+            break;
+            case "Quote":
+            setStatusLabel = statusLabels[0];
+            break;
+        }
+
+        var assignedToInput = $('#assignedTo' + this._id).val()
+        var timestamp = new Date();
+        var time = timestamp.getTime();
+        var now = timestamp.toString('yyyy-MM-dd');
+        
+        Orders.update({_id: this._id}, 
+                {
+                year: yearInput,
+                model: modelInput,
+                partInfo: partInfoInput,
+                partPrice: partPriceInput,
+                customerName: customerNameInput,
+                customerPhone: customerPhoneInput,
+                status: {
+                        statusType: orderStatusInput,
+                        statusLabel: setStatusLabel
+                },
+                assignedTo: assignedToInput,
+                timestamp: now,
+                rawTime: time,
+                comments: { 
+                        comment: "",
+                        commenter: "",
+                        commentTime: now
+                        }
+                });
+            alert("This item has been updated and is now at the top of the list.");
             }
         }; // end orderItem.events 
-
 
 } // end if meteor.is_client
 // On server startup, create some orders if the database is empty.
